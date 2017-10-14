@@ -13,7 +13,7 @@ args = ""
 
 def main():
 	try:
-		opts, args = getopt.getopt(sys.argv[1:], "h:u:p:t:s:he", ["hostName=", 
+		opts, args = getopt.getopt(sys.argv[1:], "h:u:p:t:s:he", ["hostIp=", 
 																  "userName=", 
 																  "passWord=", 
 																  "tcName=",
@@ -23,14 +23,25 @@ def main():
 		print str(err)  # will print something like "option -a not recognized"
 		sys.exit()
 	for option in opts:
-		print type(list(option))
 		try:
-			if "hostName" in option[0]:
-				
-
+			if "hostIp" in option[0]:
+				hName = option[1]
+			elif "userName" in option[0]:
+				uName = option[1]
+			elif "passWord" in option[0]:
+				passwd = option[1]
+			elif "tcName" in option[0]:
+				tName = option[1]
+			elif "suiteName" in option[0]:
+				uName = option[1]
+			elif "help" in option[0]:
+				usage()
+		except:
+			print "Something missed"
+			
 def usage():
 	print "################################################################"
-	print "#      --hostName = hostname/ip [str]                          #"
+	print "#      --hostIp = hostname/ip [str]                            #"
 	print "#      --username = username [str]                             #"     
 	print "#      --passWord = password [str]                             #"
 	print "#      --tcName   = testcasename                               #"
