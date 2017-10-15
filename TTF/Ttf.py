@@ -1,6 +1,8 @@
+#Import Module
 import os,sys,re
 import getopt
 import sys,os
+from subprocess import call
 ###Declare global variables
 hName = ""
 uName = ""
@@ -13,7 +15,7 @@ args = ""
 
 def main():
 	try:
-		opts, args = getopt.getopt(sys.argv[1:], "h:u:p:t:s:he", ["hostIp=", 
+		opts, args = getopt.getopt(sys.argv[1:len(sys.argv)], "h:u:p:t:s:he", ["hostIp=", 
 																  "userName=", 
 																  "passWord=", 
 																  "tcName=",
@@ -22,6 +24,8 @@ def main():
 	except getopt.GetoptError as err:
 		print str(err)  # will print something like "option -a not recognized"
 		sys.exit()
+	if len(opts) == 0:
+		usage()
 	for option in opts:
 		try:
 			if "hostIp" in option[0]:
@@ -36,8 +40,12 @@ def main():
 				uName = option[1]
 			elif "help" in option[0]:
 				usage()
+
 		except:
-			print "Something missed"
+			print "Something went wrong"
+			
+	#Validating the ip
+	validationIp(hName)
 			
 def usage():
 	print "################################################################"
@@ -48,6 +56,11 @@ def usage():
 	print "#      --suiteName   = testsuitname                            #"
 	print "#      --help                                                  #"
 	print "################################################################" 
+	
+	
+def validationIp(ip):
+	call(["ls", "-l"])
 
+	
 if __name__ == "__main__":
 	main()
